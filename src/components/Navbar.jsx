@@ -56,7 +56,7 @@ useGSAP(() => {
   return (
     <nav
       ref={ref}
-      className="fixed top-0 inset-x-0 z-40 flex flex-col pt-2 px-8 text-red-700"
+      className="fixed top-0 inset-x-0 z-40 flex flex-col pt-2 px-8 text-red-700 bg-white"
     >
       <header className="">
         <h1 className="text-[clamp(2rem,19vw,20rem)] md:leading-50 whitespace-nowrap font-semibold tracking-tight">

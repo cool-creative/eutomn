@@ -1,3 +1,4 @@
+import Hero from "./components/Hero";
 import Intro from "./components/Intro";
 import Navbar from "./components/Navbar";
 
@@ -6,11 +7,13 @@ export default function App() {
 
   return (
     <main
-      className="h-screen w-full bg-white flex items-start justify-center"
+      className="h-fit w-full bg-white flex flex-col  justify-center"
     >
       <Intro/>
       <Navbar/>
-      <div className="h-[200vh] w-full"></div>
+      <Hero/>
+      <div className="h-[90vh] w-full"></div>
+
     </main>
   );
 }
