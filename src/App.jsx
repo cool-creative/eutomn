@@ -1,13 +1,15 @@
-import Intro2 from "./components/Intro2";
+import Intro from "./components/Intro";
+import Navbar from "./components/Navbar";
 
 export default function App() {
 
 
   return (
     <main
-      className="h-screen w-screen bg-stone-200 flex items-center justify-center"
+      className="h-screen w-screen bg-stone-100 flex items-start justify-center"
     >
-      <Intro2/>
+      <Intro/>
+      <Navbar/>
     </main>
   );
 }
