@@ -6,10 +6,11 @@ export default function App() {
 
   return (
     <main
-      className="h-screen w-screen bg-stone-100 flex items-start justify-center"
+      className="h-screen w-full bg-white flex items-start justify-center"
     >
       <Intro/>
       <Navbar/>
+      <div className="h-[200vh] w-full"></div>
     </main>
   );
 }
