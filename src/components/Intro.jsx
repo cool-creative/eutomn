@@ -1,10 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-
-gsap.registerPlugin(ScrollTrigger);
 
 const TITLE = "NEUTOMNI";
 const COUNT_END = 100;
@@ -34,8 +31,7 @@ export default function Intro({navRef}) {
 
     // const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     // if (reduce) { setDone(true); return; }
-    window.scrollTo(0,0);
-    ScrollTrigger.refresh();
+
 
     const D = 3; // phase 1 length (seconds)
     const root = ref.current;
