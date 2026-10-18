@@ -19,12 +19,12 @@ const reelItems = (c) => ["", ...COLUMNS[c]];
 
 
 
-export default function Intro() {
+export default function Intro({navRef}) {
         
   
+  const [done, setDone] = useState(false);
   const [Dash, setDash] = useState([]);
   const ref = useRef(null);
-  const [done, setDone] = useState(false);
 
   useGSAP(() => {
 
@@ -33,6 +33,12 @@ export default function Intro() {
 
     const D = 3; // phase 1 length (seconds)
     const root = ref.current;
+
+    // Navbar 
+    const navItems = navRef.current;
+    const navLinks = navItems.querySelector('.links');
+    const navFade = navItems.querySelector('.fade');
+    const navMail = navItems.querySelector('.mail');
 
     const chars = gsap.utils.toArray(".char", root);
     const shapes = gsap.utils.toArray(".shape", root);
@@ -110,9 +116,12 @@ export default function Intro() {
 
     // mid fades away
     tl.to(".mid", { opacity: 0, yPercent: 20, duration: 0.6, ease: "power1.out" }, "phase2");
-    // top slides up, bottom slides down
+    // top slides up, bottom slides down 
     tl.to(".top", { yPercent: -100, duration: 1.2, ease: "power1.out" }, "phase2");
     tl.to(".bottom", { yPercent: 100, duration: 1.2, ease: "power1.out" }, "phase2");
+
+    // nav items animation
+    tl.from([navFade, navLinks, navMail], {opacity: 0, y: 10, duration: 0.8, stagger: 0.3}, "<0.25"); 
 
   }, { scope: ref });
 
