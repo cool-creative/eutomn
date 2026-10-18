@@ -73,7 +73,7 @@ export default function Hero(){
                     </div>
                 </div>
 
-            <div className="img relative w-full h-[120vh] "> 
+            <div className="img relative w-full h-screen "> 
                 <div className="image w-full h-full bg-linear-to-tl from-purple-200 via-red-200 to-yellow-200"></div>
             </div>
 

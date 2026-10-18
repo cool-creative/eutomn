@@ -2,6 +2,8 @@ import { useRef } from "react";
 import Hero from "./components/Hero";
 import Intro from "./components/Intro";
 import Navbar from "./components/Navbar";
+import Cards from "./components/Cards";
+
 
 export default function App() {
 
@@ -12,7 +14,7 @@ export default function App() {
       <Navbar navRef={navRef} />
       <Intro navRef={navRef} />
       <Hero />
-      <div className="h-[90vh] w-full"></div>
+      <Cards />
 
     </main>
   );
