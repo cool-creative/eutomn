@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { useLenis } from "lenis/react";
+
 
 
 const TITLE = "NEUTOMNI";
@@ -27,11 +29,13 @@ export default function Intro({navRef}) {
   const [Dash, setDash] = useState([]);
   const ref = useRef(null);
 
+  const lenis = useLenis();
+
+
   useGSAP(() => {
 
     // const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     // if (reduce) { setDone(true); return; }
-
 
     const D = 3; // phase 1 length (seconds)
     const root = ref.current;
@@ -58,7 +62,10 @@ export default function Intro({navRef}) {
     // counter: [hundreds, tens, ones]
     const reels = gsap.utils.toArray(".reel", root);
   
-    const tl = gsap.timeline({onComplete: () => setDone(true)});  // unMount or hide element
+    const tl = gsap.timeline({onComplete: () => {  // unMount or hide element
+      setDone(true);
+     }
+    });
 
     /* ================= PHASE 1 (all start at 0) ================= */
 
@@ -125,7 +132,22 @@ export default function Intro({navRef}) {
     // nav items animation
     tl.from([navFade, navLinks, navMail], {opacity: 0, y: 10, duration: 0.8, stagger: 0.3}, "<0.25"); 
 
+    return () => { tl.kill(); }
   }, { scope: ref });
+
+
+  useEffect(() => {
+    if (!lenis || done) return;
+    const html = document.documentElement;
+    const sbw = window.innerWidth - html.clientWidth;  // measure while the scrollbar exists
+    html.style.setProperty("--sbw", sbw + "px");
+    html.classList.add("intro-lock");
+    lenis.stop();
+    return () => {                                     // runs when done flips to true
+      html.classList.remove("intro-lock");
+      lenis.start();                                   // same task as the class removal = same frame
+    };
+  }, [lenis, done]);
 
   useEffect(() => {  // used to stop too much re-renders
     let timer
@@ -153,7 +175,7 @@ export default function Intro({navRef}) {
       ref={ref}
       id="intro"
       aria-hidden="true"
-      className="fixed inset-0 z-50 w-screen h-screen flex flex-col overflow-hidden"
+      className="fixed inset-0 z-50 w-full h-screen flex flex-col "
     >
       <div className="top h-[60%] w-full bg-red-700 flex flex-col justify-between">
         <div className="text size-fit flex justify-center p-4 ">

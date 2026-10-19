@@ -12,11 +12,11 @@ const END_LINE = 28;   // line height of the shrunk title (px)
 export default function Navbar({navRef}) {
 
   useGSAP(() => { 
-    const root = navRef.current;
+    const root   = navRef.current;
+    const h1     = root.querySelector("h1");
+    const fade   = root.querySelector(".fade");
     const header = root.querySelector("header");
-    const h1 = root.querySelector("h1");
-    const fade = root.querySelector(".fade");
-    const links = root.querySelector(".links");
+    const links  = root.querySelector(".links");
 
     const tl = gsap.timeline({
       defaults: { ease: "none" },
@@ -59,7 +59,7 @@ export default function Navbar({navRef}) {
   return (
     <nav
       ref={navRef}
-      className="fixed top-0 inset-x-0 z-40 flex flex-col pt-2 px-8 text-red-700 bg-white"
+      className="fixed top-0 inset-x-0  z-40 flex flex-col pt-2 px-8 text-red-700"
     >
       <header className="header">
         <h1 className="text-[clamp(2rem,19vw,20rem)] md:leading-50 whitespace-nowrap font-semibold tracking-tight">
