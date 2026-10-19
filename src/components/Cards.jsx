@@ -10,6 +10,7 @@ export default function Cards(){
     const cardsRef = useRef(null);
     
     useGSAP(() => {
+        ScrollTrigger.refresh();
         const cards = gsap.utils.toArray('.card', cardsRef.current); 
         const stick_div = document.querySelector('.stick-cards-div'); 
     
@@ -42,7 +43,8 @@ export default function Cards(){
                         {
                             Array.from({length:4}).map((_, i)=>{
                                 return (
-                                    <div key={i} className="card h-[70vh] w-[25%] bg-red-700 flex items-center justify-center">
+                                    // clipPath to not have initial visible height at start
+                                    <div style={{clipPath: "inset(100% 0% 0% 0%)"}} key={i} className="card h-[70vh] w-[25%] bg-red-700 flex items-center justify-center">
                                         <p className="text-8xl font-bold text-red-500">0{i+1}</p>
                                     </div>
                                 )
