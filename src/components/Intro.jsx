@@ -3,6 +3,8 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useLenis } from "lenis/react";
 
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 
 
 const TITLE = "NEUTOMNI";
@@ -33,6 +35,10 @@ export default function Intro({navRef}) {
 
 
   useGSAP(() => {
+    // fixed refresh issue
+    ScrollTrigger.clearScrollMemory("manual");
+    window.scrollTo(0, 0);  // always start the intro from the top
+    ScrollTrigger.refresh();
 
     // const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     // if (reduce) { setDone(true); return; }
@@ -64,6 +70,7 @@ export default function Intro({navRef}) {
   
     const tl = gsap.timeline({onComplete: () => {  // unMount or hide element
       setDone(true);
+      ScrollTrigger.refresh(); // solve mid-web open after reload-intro
      }
     });
 
