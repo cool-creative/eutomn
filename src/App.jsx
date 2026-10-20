@@ -32,7 +32,7 @@ export default function App() {
 
     <>
       <ReactLenis root options={{ autoRaf: false }} ref={lenisRef} />
-      <main className="h-fit w-full bg-white flex flex-col justify-center">
+      <main className="h-fit w-full bg-white flex flex-col justify-center overflow-x-hidden">
         
         <Navbar navRef={navRef} />
         <Hero heroRef={heroRef} />

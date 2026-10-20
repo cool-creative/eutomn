@@ -2,8 +2,8 @@
 
 export default function Work(){
     return(
-        <section>
-            
+        <section className="w-full h-screen bg-amber-100"> 
+
         </section>
     )
 }

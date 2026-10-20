@@ -152,12 +152,16 @@ export default function Intro({navRef, heroRef}) {
   useEffect(() => {
     if (!lenis || done) return;
     const html = document.documentElement;
-    const sbw = window.innerWidth - html.clientWidth;  // measure while the scrollbar exists
-    html.style.setProperty("--sbw", sbw + "px");
-    html.classList.add("intro-lock");
+    const isMobile = window.innerWidth <= 640;
+    const sbw = isMobile ? 0 : Math.max(0, window.innerWidth - html.clientWidth);
+    if (sbw > 0) {
+      html.style.setProperty("--sbw", sbw + "px");
+      html.classList.add("intro-lock");
+    }
     lenis.stop();
     return () => {                                     // runs when done flips to true
       html.classList.remove("intro-lock");
+      html.style.removeProperty("--sbw");
       lenis.start();                                   // same task as the class removal = same frame
     };
   }, [lenis, done]);
@@ -188,11 +192,11 @@ export default function Intro({navRef, heroRef}) {
       ref={ref}
       id="intro"
       aria-hidden="true"
-      className="fixed inset-0 z-50 w-full h-screen flex flex-col "
+      className="fixed inset-0 z-50 w-full h-screen flex flex-col overflow-hidden"
     >
       <div className="top h-[60%] w-full bg-red-700 flex flex-col justify-between">
         <div className="text size-fit flex justify-center p-4 ">
-          <h1 className="text-white text-[clamp(2rem,19vw,20rem)] md:leading-50 whitespace-nowrap font-semibold tracking-tight">
+          <h1 className="text-white text-[clamp(2rem,11.5vw,20rem)] md:text-[clamp(2rem,19vw,20rem)] md:leading-50 whitespace-nowrap font-semibold tracking-tight">
             {TITLE.split("").map((c, i) => (
               <span key={i} className="inline-block  align-top">
                 <span className="char inline-block">{c}</span>

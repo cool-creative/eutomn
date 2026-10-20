@@ -1,5 +1,27 @@
 @import "tailwindcss";
 @import 'lenis/dist/lenis.css';
- 
-html.intro-lock { padding-right: var(--sbw); }
-html.intro-lock nav { right: var(--sbw); }   
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  box-sizing: border-box;
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+body {
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
+}
+
+@media (min-width: 641px) {
+  html.intro-lock {
+    padding-right: var(--sbw, 0px);
+  }
+  html.intro-lock nav {
+    right: var(--sbw, 0px);
+  }
+}

@@ -59,25 +59,25 @@ export default function Navbar({navRef}) {
   return (
     <nav
       ref={navRef}
-      className="fixed top-0 inset-x-0 z-40 flex flex-col p-2 px-8 text-red-700 bg-white"
+      className="fixed top-0 inset-x-0 z-40 flex flex-col p-2 px-4 md:px-8 text-red-700 bg-white"
     >
-      <header className="header w-fit "> 
-        <h1 className="text-[clamp(2rem,19vw,20rem)] md:leading-50 whitespace-nowrap font-semibold tracking-tight">
+      <header className="header w-fit"> 
+        <h1 className="text-[clamp(2rem,11.5vw,20rem)] md:text-[clamp(2rem,19vw,20rem)] md:leading-50 whitespace-nowrap font-semibold tracking-tight">
           NEUTOMNI
         </h1>
       </header>
 
-      <div className="links grid grid-cols-3 items-center font-semibold text-base">
-        <div className="fade justify-self-start ml-6 opacity-80">
-          <p>Digital Design & Webflow Studio</p>
+      <div className="links flex justify-between items-center font-semibold text-xs sm:text-sm md:text-base">
+        <div className="fade opacity-80 md:ml-6">
+          <p className="text-xs sm:text-sm md:text-base">Digital Design & Webflow Studio</p>
         </div>
-        <div className="pages flex items-center gap-6 justify-self-center">
+        <div className="pages hidden md:flex items-center md:gap-6">
           <p>Process</p>
           <p>Portfolio</p>
           <p>Book a Call</p>
         </div>
-        <div className="mail justify-self-end">
-          <p>contact@neutomi.com</p>
+        <div className="mail">
+          <p className="text-xs sm:text-sm md:text-base">contact@neutomi.com</p>
         </div>
       </div>
     </nav>

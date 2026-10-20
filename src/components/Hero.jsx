@@ -21,20 +21,20 @@ export default function Hero({heroRef}){
             },
         });
         tl.fromTo(".image",
-            { scale: 0.4 },
+            { scale: 0.3 },
             { scale: 1, duration: 1 }
         );
 
         const row = heroRef.current.querySelector(".contain");
         const items = gsap.utils.toArray(".char", row);
-        const GAP = 12;  // gap-3
         gsap.fromTo(items,
             { paddingInline: 0 },
             {
             // justify-around: free space split into 7 equal slots, half on each side of an item
             paddingInline: () => {
+                const currentGap = window.innerWidth <= 640 ? 6 : 12;
                 const total = items.reduce((sum, el) => sum + el.offsetWidth, 0);
-                const free = row.clientWidth - total - GAP * (items.length - 1);
+                const free = row.clientWidth - total - currentGap * (items.length - 1);
                 return Math.max(0, free / items.length / 2);
             },
             ease: "none",
@@ -51,15 +51,15 @@ export default function Hero({heroRef}){
     }, {scope: heroRef});
 
     return (
-        <main ref={heroRef} className="relative h-fit w-full items-center justify-center overflow-clip">
+        <main ref={heroRef} className="relative min-h-screen h-fit w-full items-center justify-center overflow-clip">
             <div className="spacer h-[50vh] w-full pointer-events-none "></div>
 
               {/* sticky wrapper: h-0 so it takes no space, text overflows below it */}
                 <div className="sticky top-[50vh] h-0 w-full">
-                    <div className="flex w-full h-fit text-wrap">
-                        <div className="w-1/2" />
-                        <div className="w-1/2">
-                            <div className="text text-5xl text-red-700 tracking-tight">
+                    <div className="flex w-full h-fit ">
+                        <div className="w-1/2 " />
+                        <div className="w-1/2 ">
+                            <div className="text text-xl sm:text-3xl md:text-5xl text-red-700 tracking-tight p-2 md:p-0">
                                 <p className="line">We build websites for</p>
                                 <p className="line">people who care </p>
                                 <p className="italic font-bold font-serif line ">
@@ -74,11 +74,11 @@ export default function Hero({heroRef}){
                 <img src="/neutomi.avif" className="image w-full h-full object-cover" /> 
             </div>
 
-            <div className="h-fit py-2 w-full px-8 bg-white relative">
-                <div className="contain flex items-center justify-center gap-3 capitalize text-red-700 font-semibold">
+            <div className="h-fit py-2 w-full px-4 md:px-8 bg-white relative overflow-hidden">
+                <div className="contain flex items-center justify-center gap-1.5 sm:gap-3 capitalize text-red-700 font-semibold text-xs sm:text-base md:text-lg">
                     {
                         ["Design", "+", "Webflow", "+", "Strategy", "=", "Full Circle"].map((item, index) => (
-                            <p key={index} className="char whitespace-nowrap text-lg">{item}</p>
+                            <p key={index} className="char whitespace-nowrap">{item}</p>
                         ))
                     }
                 </div>
