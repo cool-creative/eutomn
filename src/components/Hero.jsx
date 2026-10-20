@@ -1,22 +1,19 @@
 import { useGSAP } from "@gsap/react"
 import {gsap} from 'gsap';
-import { useRef } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 
 gsap.registerPlugin(ScrollTrigger);
 
 
-export default function Hero(){
-
-    const ref = useRef(null);
+export default function Hero({heroRef}){
 
     useGSAP(() => {
         
         const tl = gsap.timeline({
             defaults: { ease: "none" },
             scrollTrigger: {
-                trigger: ref.current,
+                trigger: heroRef.current,
                 start: "top top",
                 end: "+=300",
                 scrub: 0.5,
@@ -28,7 +25,7 @@ export default function Hero(){
             { scale: 1, duration: 1 }
         );
 
-        const row = ref.current.querySelector(".contain");
+        const row = heroRef.current.querySelector(".contain");
         const items = gsap.utils.toArray(".char", row);
         const GAP = 12;  // gap-3
         gsap.fromTo(items,
@@ -51,10 +48,10 @@ export default function Hero(){
             }
         );
        
-    }, {scope: ref});
+    }, {scope: heroRef});
 
     return (
-        <main ref={ref} className="relative h-fit w-full items-center justify-center overflow-clip">
+        <main ref={heroRef} className="relative h-fit w-full items-center justify-center overflow-clip">
             <div className="spacer h-[50vh] w-full pointer-events-none "></div>
 
               {/* sticky wrapper: h-0 so it takes no space, text overflows below it */}
@@ -63,9 +60,9 @@ export default function Hero(){
                         <div className="w-1/2" />
                         <div className="w-1/2">
                             <div className="text text-5xl text-red-700 tracking-tight">
-                                We build websites for <br />
-                                people who care <br />
-                                <p className="italic font-bold font-serif ">
+                                <p className="line">We build websites for</p>
+                                <p className="line">people who care </p>
+                                <p className="italic font-bold font-serif line ">
                                     as much as we do.
                                 </p>
                             </div>
@@ -74,7 +71,7 @@ export default function Hero(){
                 </div>
 
             <div className="img relative w-full h-screen "> 
-                <div className="image w-full h-full bg-linear-to-tl from-purple-200 via-red-200 to-yellow-200"></div>
+                <img src="/neutomi.avif" className="image w-full h-full object-cover" /> 
             </div>
 
             <div className="h-fit py-2 w-full px-8 bg-white relative">

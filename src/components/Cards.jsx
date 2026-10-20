@@ -14,9 +14,7 @@ export default function Cards(){
         const cards = gsap.utils.toArray('.card', cardsRef.current); 
         const stick_div = document.querySelector('.stick-cards-div'); 
     
-        gsap.fromTo(cards,
-        { clipPath: "inset(100% 0% 0% 0%)" },   // fully hidden: top edge sits at the bottom
-        {
+        gsap.to(cards, {
             clipPath: "inset(0% 0% 0% 0%)",       // fully revealed
             // ease: "power2.out",
             ease: "none",
@@ -33,12 +31,14 @@ export default function Cards(){
         );
     }, {scope: cardsRef});
     return(
-        <section ref={cardsRef} className="h-fit w-full bg-white px-8 mt-20">
+        <section ref={cardsRef} className="h-fit w-full px-8 bg-yellow-100"> 
 
             <div className=" h-[200vh] w-full flex flex-col items-center gap-3 ">
 
                 <div className=" stick-cards-div sticky top-0 w-full h-screen flex flex-col justify-end gap-8 p-4"> 
-                    <div className="w-full text-8xl font-bold text-red-800 text-center">OUR Features</div>
+                    <div className="w-full text-8xl font-bold text-red-800 text-center">
+                        OUR Features
+                    </div>
                     <div className=" w-full h-fit flex gap-3 justify-end items-end"> 
                         {
                             Array.from({length:4}).map((_, i)=>{

@@ -11,21 +11,16 @@ const TITLE = "NEUTOMNI";
 const COUNT_END = 100;
 
 // every number the counter passes through: 001 ... 100
-const NUMS = ['001', ...Array.from({ length: COUNT_END/5 }, (_, i) =>
-  String((i + 1) * 5).padStart(3, "0")
-)];
+const NUMS = ['001', ...Array.from({ length: COUNT_END/5 }, (_, i) => String((i + 1) * 5).padStart(3, "0"))];
 
 // per column, collapse consecutive repeats (hundreds: 0,1 / tens: 0..9,0 / ones: 1..9,0,1...)
-const COLUMNS = [0, 1, 2].map((c) =>
-  NUMS.map((s) => s[c]).filter((d, i, a) => i === 0 || d !== a[i - 1])
-);
+const COLUMNS = [0, 1, 2].map((c) => NUMS.map((s) => s[c]).filter((d, i, a) => i === 0 || d !== a[i - 1]));
 // blank first item so the first number enters from below
 const reelItems = (c) => ["", ...COLUMNS[c]];
 
 
 
-export default function Intro({navRef}) {
-        
+export default function Intro({navRef, heroRef}) {
   
   const [done, setDone] = useState(false);
   const [Dash, setDash] = useState([]);
@@ -45,12 +40,18 @@ export default function Intro({navRef}) {
 
     const D = 3; // phase 1 length (seconds)
     const root = ref.current;
+    const hero = heroRef.current;
 
     // Navbar 
     const navItems = navRef.current;
+    const navHeader = navItems.querySelector('header');
     const navLinks = navItems.querySelector('.links');
     const navFade = navItems.querySelector('.fade');
     const navMail = navItems.querySelector('.mail');
+
+    // hero lines
+    const heroLines = gsap.utils.toArray(".line", hero);    
+    const heroImg = hero.querySelector(".img");    
 
     const chars = gsap.utils.toArray(".char", root);
     const shapes = gsap.utils.toArray(".shape", root);
@@ -137,7 +138,12 @@ export default function Intro({navRef}) {
     tl.to(".bottom", { yPercent: 100, duration: 1.2, ease: "power1.out" }, "phase2");
 
     // nav items animation
-    tl.from([navFade, navLinks, navMail], {opacity: 0, y: 10, duration: 0.8, stagger: 0.3}, "<0.25"); 
+    tl.from(navHeader, {yPercent: -100, duration: 1, ease: "power2.out"}, "phase2");
+    tl.from([navFade, navLinks, navMail], {opacity: 0, y: 10, duration: 0.6, stagger: 0.3}, "<0.25"); 
+
+    // hero lines
+    tl.from(heroLines, {y: 20, filter: 'blur(5px)', stagger: 0.1, opacity: 0, duration: 0.6, ease: "power2.out"}, "<0.8");
+    tl.from(heroImg, {y: 30, duration: 0.6, scale: 0.2, ease: "power2.out"}, "<0.35")
 
     return () => { tl.kill(); }
   }, { scope: ref });

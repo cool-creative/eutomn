@@ -1,5 +1,5 @@
 @import "tailwindcss";
 @import 'lenis/dist/lenis.css';
-
+ 
 html.intro-lock { padding-right: var(--sbw); }
-html.intro-lock nav { right: var(--sbw); }  /* your fixed navbar; use its real selector */
+html.intro-lock nav { right: var(--sbw); }   

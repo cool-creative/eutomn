@@ -9,10 +9,12 @@ import { useEffect, useRef } from 'react'
 
 
 
+
 export default function App() {
   
   const navRef = useRef(null);
   const lenisRef = useRef(null);
+  const heroRef = useRef(null);
   
   useEffect(() => {
     function update(time) {
@@ -30,9 +32,11 @@ export default function App() {
       <ReactLenis root options={{ autoRaf: false }} ref={lenisRef} />
       <main className="h-fit w-full bg-white flex flex-col justify-center">
         <Navbar navRef={navRef} />
-        <Intro navRef={navRef} />
-        <Hero />
+        <Hero heroRef={heroRef} />
+        <Intro navRef={navRef} heroRef={heroRef} />
+        <div className="h-screen w-full bg-black"></div> 
         <Cards />
+        <div className="h-screen w-full bg-black"></div> 
       </main>
     </>
   );
