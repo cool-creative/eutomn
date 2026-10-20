@@ -2,6 +2,7 @@ import Hero from "./components/Hero";
 import Intro from "./components/Intro";
 import Navbar from "./components/Navbar";
 import Cards from "./components/Cards";
+import About from "./pages/About";
 
 import gsap from 'gsap'
 import { ReactLenis } from 'lenis/react'
@@ -34,7 +35,7 @@ export default function App() {
         <Navbar navRef={navRef} />
         <Hero heroRef={heroRef} />
         <Intro navRef={navRef} heroRef={heroRef} />
-        <div className="h-screen w-full bg-black"></div> 
+        <About/>
         <Cards />
         <div className="h-screen w-full bg-black"></div> 
       </main>

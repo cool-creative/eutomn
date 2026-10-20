@@ -31,7 +31,7 @@ export default function Cards(){
         );
     }, {scope: cardsRef});
     return(
-        <section ref={cardsRef} className="h-fit w-full px-8 bg-yellow-100"> 
+        <section ref={cardsRef} className="h-fit w-full px-8 "> 
 
             <div className=" h-[200vh] w-full flex flex-col items-center gap-3 ">
 
