@@ -1,13 +1,14 @@
 import { useGSAP } from "@gsap/react"
 import {gsap} from 'gsap';
 import { useRef } from "react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Cards(){
 
     const cardsRef = useRef(null);
+    const data = ['Design', 'Development', 'Marketing', 'Maintenance'];
     
     useGSAP(() => {
         ScrollTrigger.refresh();
@@ -45,7 +46,11 @@ export default function Cards(){
                                 return (
                                     // clipPath to not have initial visible height at start
                                     <div style={{clipPath: "inset(100% 0% 0% 0%)"}} key={i} className="card h-[70vh] w-[25%] bg-red-700 flex items-center justify-center">
-                                        <p className="text-8xl font-bold text-red-500">0{i+1}</p>
+                                        <div className="w-full h-1/2 flex items-center justify-center flex-col font-bold gap-4">
+                                            <p className="text-8xl text-red-300">0{i+1}</p>
+                                            <p className="text-5xl italic text-red-100  font-serif tracking-tighter">{data[i]}</p>
+                                        </div>
+                                        
                                     </div>
                                 )
                             })
@@ -57,4 +62,4 @@ export default function Cards(){
 
         </section>
     )
-}
+};

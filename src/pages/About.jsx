@@ -36,10 +36,9 @@ function ShowP({l1, l2, flag}){
 
     return (
         <motion.p className="text-6xl "
-            initial={{y: 20, opacity: 0, filter: 'blur(5px)'}}
+            initial={{y: 40, opacity: 0, filter: 'blur(5px)'}}
             whileInView={{y: 0, opacity: 1, filter: 'blur(0px)'}}
             transition={{duration: 0.5, delay: 0.2, ease: "power2.out"}} 
-            viewport={{once: true}}
         >
             {l1}
             {
