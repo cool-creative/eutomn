@@ -7,7 +7,8 @@ import About from "./pages/About";
 import gsap from 'gsap'
 import { ReactLenis } from 'lenis/react'
 import { useEffect, useRef } from 'react'
-import Work from "./pages/Work";
+// import Work from "./pages/Work";
+import Service from "./pages/Service";
 
 
 
@@ -32,7 +33,7 @@ export default function App() {
 
     <>
       <ReactLenis root options={{ autoRaf: false }} ref={lenisRef} />
-      <main className="h-fit w-full bg-white flex flex-col justify-center overflow-x-hidden">
+      <main className="h-fit w-full bg-white flex flex-col justify-center ">
         
         <Navbar navRef={navRef} />
         <Hero heroRef={heroRef} />
@@ -40,7 +41,8 @@ export default function App() {
 
         <About/>
         <Cards />
-        <Work /> 
+        {/* <Work />  */}
+        <Service/>
 
       </main>
     </>
