@@ -9,6 +9,7 @@ import { ReactLenis } from 'lenis/react'
 import { useEffect, useRef } from 'react'
 // import Work from "./pages/Work";
 import Service from "./pages/Service";
+import Footer from "./pages/Footer";
 
 
 
@@ -41,8 +42,9 @@ export default function App() {
 
         <About/>
         <Cards />
-        {/* <Work />  */}
         <Service/>
+
+        <Footer/>
 
       </main>
     </>

@@ -60,7 +60,7 @@ export default function Service() {
           {/* Left column: all labels, current one tagged Active */} 
           <ul className="flex flex-col gap-3 md:gap-6">
             {items.map((item, i) => {
-              const isActive = i === active;
+              const isActive = i === active; 
               return (
                 <li
                   key={item.label}
