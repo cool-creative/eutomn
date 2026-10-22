@@ -23,7 +23,7 @@ export default function Cards(){
             stagger: 0.15,
             scrollTrigger: {
                 trigger: stick_div,
-                start: "top 80%",                   // the moment the sticky stage sticks
+                start: "top 70%",                   // the moment the sticky stage sticks
                 end: () => "+=" + window.innerHeight * 0.8, // done at 80% of the stuck range
                 scrub: 0.5,
                 invalidateOnRefresh: true,

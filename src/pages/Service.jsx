@@ -20,43 +20,93 @@ export default function Service() {
   const sectionRef = useRef(null);
   const [active, setActive] = useState(0);
 
+
+  // useGSAP(() => {
+  //   const images = gsap.utils.toArray(".reveal-img", sectionRef.current);
+
+  //   const tl = gsap.timeline({
+  //     defaults: { ease: "none" },
+  //     scrollTrigger: {
+  //       trigger: sectionRef.current,
+  //       start: "top top",
+  //       end: "bottom bottom",
+  //       scrub: 1,
+  //       invalidateOnRefresh: true,
+  //       onEnter: () => setActive(0),
+  //       onLeaveBack: () => setActive(0),
+  //     },
+  //   });
+
+  //   images.forEach((img, i) => {
+  //     if (i === 0) return;
+
+  //     tl.fromTo(img,
+  //       { clipPath: HIDDEN },
+  //       { clipPath: SHOWN,
+  //         onUpdate: function () {
+  //           // if (this.progress() >= 0.4) {
+  //           //   setActive((prev) => prev === i ? prev : i);
+  //           // } else {
+  //           //   setActive((prev) => prev === i - 1 ? prev : i - 1);
+  //           // } 
+  //           if (this.progress() >= 0.4) {
+  //   setActive(i);
+  // } else {
+  //   setActive(i - 1);
+  // }
+  //         }
+  //       }
+  //     );
+  //   });
+  // }, { scope: sectionRef });
   useGSAP(() => {
-    const images = gsap.utils.toArray(".reveal-img", sectionRef.current);
+  const images = gsap.utils.toArray(".reveal-img", sectionRef.current);
+  let sectionEntered = false;
 
-    const tl = gsap.timeline({
-      defaults: { ease: "none" },
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 1,
-        invalidateOnRefresh: true,
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: sectionRef.current,
+      start: "top top",
+      end: "bottom bottom",
+      scrub: 1,
+      onEnter: () => {
+        sectionEntered = true;
+        setActive(0);
       },
-    });
+      onLeaveBack: () => {
+        sectionEntered = false;
+        setActive(0);
+      },
+    },
+  });
 
-    images.forEach((img, i) => {
-      if (i === 0) return;
+  images.forEach((img, i) => {
+    if (i === 0) return;
 
-      tl.fromTo(img,
-        { clipPath: HIDDEN },
-        { clipPath: SHOWN,
-          onUpdate: function () {
-            if (this.progress() >= 0.4) {
-              setActive((prev) => prev === i ? prev : i);
-            } else {
-              setActive((prev) => prev === i - 1 ? prev : i - 1);
-            }
-          }
-        }
-      );
-    });
-  }, { scope: sectionRef });
+    tl.fromTo(
+      img,
+      { clipPath: HIDDEN },
+      {
+        clipPath: SHOWN,
+        onUpdate: function () {
+          if (!sectionEntered) return;
 
+          const nextActive =
+            this.progress() >= 0.4 ? i : i - 1;
+
+          setActive((prev) =>
+            prev === nextActive ? prev : nextActive
+          );
+        },
+      }
+    );
+  });
+}, { scope: sectionRef });
   return (
     <section ref={sectionRef} className="relative w-full h-[300vh] bg-black ">     
 
       <div className="sticky top-0 h-screen w-full px-4 md:px-8 bg-white">
-        <div className=" flex h-full justify-between items-center gap-4 md:gap-12">
+        <div className=" flex flex-col md:flex-row h-full justify-between items-center gap-4 md:gap-12">
           {/* Left column: all labels, current one tagged Active */} 
           <ul className="flex flex-col gap-3 md:gap-6">
             {items.map((item, i) => {
