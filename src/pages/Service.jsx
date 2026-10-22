@@ -6,9 +6,9 @@ import { useRef, useState } from "react";
 gsap.registerPlugin(ScrollTrigger);
 
 const items = [
-  { label: "Design", bg: "from-red-900 to-red-600" },
-  { label: "Development", bg: "from-rose-900 to-rose-500" },
-  { label: "Marketing", bg: "from-orange-900 to-red-500" },
+  { label: "Design", bg: "from-red-900 to-red-600", src: '/asset-1.jpg' },
+  { label: "Development", bg: "from-rose-900 to-rose-500", src: '/asset-2.jpg' },
+  { label: "Marketing", bg: "from-orange-900 to-red-500", src: '/asset-3.jpg' },
 ];
 
 // Visible area starts as a single point at the bottom-right corner
@@ -84,9 +84,7 @@ export default function Service() {
                 style={i === 0 ? undefined : { clipPath: HIDDEN }}
                 className={`reveal-img absolute inset-0 flex items-center justify-center bg-linear-to-br ${item.bg}`}
               >
-                <span className="font-serif text-4xl italic text-red-100/80 md:text-7xl">
-                  {item.label}
-                </span>
+                <img className="absolute w-full h-full object-cover" src={item.src} alt="" />
               </div>
             ))}
           </div>
